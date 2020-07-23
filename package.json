@@ -1,0 +1,33 @@
+{
+  "name": "yodlee-react-hook",
+  "version": "0.1.0",
+  "description": "Yodlee FastLink integration with React hooks",
+  "repository": "github:erhangundogan/yodlee-react-hook",
+  "keywords": [
+    "react",
+    "react-hooks",
+    "yodlee",
+    "fastlink",
+    "payment-provider",
+    "integration"
+  ],
+  "types": "index.d.ts",
+  "author": "erhan.gundogan@gmail.com",
+  "license": "MIT",
+  "main": "./dist/bundle.js",
+  "scripts": {
+    "build": "rollup src/index.ts -c",
+    "watch": "rollup src/index.ts -cw"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^3.4.0",
+    "rollup": "^2.22.2",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-watch": "^4.3.1",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.6"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
+  }
+}
