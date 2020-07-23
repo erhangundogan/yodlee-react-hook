@@ -1,9 +1,9 @@
 yodlee-react-hook
 =================
 
-Yodlee FastLink React hook.
+[Yodlee](https://www.yodlee.com/) [FastLink 3.0](https://developer.yodlee.com/docs/fastlink/3.0/product-guide) React hook.
 
-This tiny library helps you to use Yodlee FastLink v3.0 integration in your React project.
+This tiny library helps you to use Yodlee FastLink v3.0 in your React projects.
 
 Installation
 ============
