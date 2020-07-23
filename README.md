@@ -18,7 +18,11 @@ yarn add yodlee-react-hook
 Usage
 =====
 
+Generate `accessToken` or `jwtToken` with your `clientId`, `secret` and `userName` on your backend and pass it down to your client below to open iframe. 
+
 ```jsx
+import { useYodlee } from 'yodlee-react-hook';
+
 const YodleeComponent = ({ accessToken }) => {
   const { ready, init } = useYodlee({
     containerId: 'container-fastlink',
