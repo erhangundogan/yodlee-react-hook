@@ -27,11 +27,11 @@ var __assign = function() {
 };
 
 var useYodlee = function (_a) {
-    var containerId = _a.containerId, _b = _a.fastLinkOptions, _c = _b.fastLinkURL, fastLinkURL = _c === void 0 ? 'https://node.sandbox.yodlee.com/authenticate/restserver' : _c, accessToken = _b.accessToken, jwtToken = _b.jwtToken, _d = _b.userExperienceFlow, userExperienceFlow = _d === void 0 ? 'Verification' : _d, onSuccess = _a.onSuccess, onError = _a.onError, onExit = _a.onExit, onEvent = _a.onEvent;
-    var _e = useState(false), ready = _e[0], setReady = _e[1];
-    var _f = useState(null), error = _f[0], setError = _f[1];
-    var _g = useState(null), data = _g[0], setData = _g[1];
-    var _h = useState(false), active = _h[0], setActive = _h[1];
+    var containerId = _a.containerId, _b = _a.fastLinkOptions, fastLinkURL = _b.fastLinkURL, accessToken = _b.accessToken, jwtToken = _b.jwtToken, _c = _b.userExperienceFlow, userExperienceFlow = _c === void 0 ? 'Verification' : _c, onSuccess = _a.onSuccess, onError = _a.onError, onExit = _a.onExit, onEvent = _a.onEvent;
+    var _d = useState(false), ready = _d[0], setReady = _d[1];
+    var _e = useState(null), error = _e[0], setError = _e[1];
+    var _f = useState(null), data = _f[0], setData = _f[1];
+    var _g = useState(false), active = _g[0], setActive = _g[1];
     useEffect(function () {
         var script = document.createElement('script');
         script.id = 'yodlee-fastlink-script';
