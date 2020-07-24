@@ -34,6 +34,7 @@ var useYodlee = function (_a) {
     var _h = useState(false), active = _h[0], setActive = _h[1];
     useEffect(function () {
         var script = document.createElement('script');
+        script.id = 'yodlee-fastlink-script';
         script.src = 'https://cdn.yodlee.com/fastlink/v3/initialize.js';
         script.async = true;
         script.defer = true;
@@ -41,11 +42,13 @@ var useYodlee = function (_a) {
         script.onerror = function () { return setError('Yodlee FastLink library could not be loaded!'); };
         document.body.appendChild(script);
         return function () {
+            var _a;
+            (_a = window.fastlink) === null || _a === void 0 ? void 0 : _a.close();
             document.body.removeChild(script);
-            window.fastlink.close();
         };
     }, []);
     var init = function () {
+        var _a;
         var token = {};
         setActive(true);
         if (accessToken) {
@@ -54,7 +57,7 @@ var useYodlee = function (_a) {
         else {
             token.jwtToken = "Bearer " + jwtToken;
         }
-        window.fastlink.open(__assign(__assign({ fastLinkURL: fastLinkURL }, token), { params: {
+        (_a = window.fastlink) === null || _a === void 0 ? void 0 : _a.open(__assign(__assign({ fastLinkURL: fastLinkURL }, token), { params: {
                 userExperienceFlow: userExperienceFlow
             }, onSuccess: function (customerData) {
                 setData(customerData);

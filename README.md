@@ -39,3 +39,13 @@ const YodleeComponent = ({ accessToken }) => {
   );
 };
 ```
+
+Test
+====
+
+```bash
+# with npm
+npm run test
+# with yarn
+yarn test
+```

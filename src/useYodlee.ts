@@ -22,18 +22,18 @@ const useYodlee: YodleeHookType = ({
   useEffect(() => {
     const script = document.createElement('script');
 
+    script.id = 'yodlee-fastlink-script';
     script.src = 'https://cdn.yodlee.com/fastlink/v3/initialize.js';
     script.async = true;
     script.defer = true;
-
     script.onload = () => setReady(true);
     script.onerror = () => setError('Yodlee FastLink library could not be loaded!');
 
     document.body.appendChild(script);
 
     return () => {
+      window.fastlink?.close();
       document.body.removeChild(script);
-      window.fastlink.close();
     }
   }, []);
 
@@ -48,7 +48,7 @@ const useYodlee: YodleeHookType = ({
       token.jwtToken = `Bearer ${jwtToken}`;
     }
 
-    window.fastlink.open({
+    window.fastlink?.open({
       fastLinkURL,
       ...token,
       params: {
