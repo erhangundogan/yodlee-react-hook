@@ -4,7 +4,7 @@ import { YodleeHookType } from '../index';
 const useYodlee: YodleeHookType = ({
  containerId,
  fastLinkOptions: {
-   fastLinkURL = 'https://node.sandbox.yodlee.com/authenticate/restserver',
+   fastLinkURL,
    accessToken,
    jwtToken,
    userExperienceFlow = 'Verification'

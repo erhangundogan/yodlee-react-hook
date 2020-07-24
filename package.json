@@ -1,6 +1,6 @@
 {
   "name": "yodlee-react-hook",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Yodlee FastLink integration with React hooks",
   "repository": "github:erhangundogan/yodlee-react-hook",
   "keywords": [

@@ -1,7 +1,7 @@
 export type UserExperienceFlowType = 'Aggregation' | 'Verification' | 'Aggregation plus Verification';
 
 export interface FastLinkOptionsType {
-  fastLinkURL?: string;
+  fastLinkURL: string;
   accessToken?: string;
   jwtToken?: string;
   userExperienceFlow?: UserExperienceFlowType;

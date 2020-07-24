@@ -7,6 +7,7 @@ describe('useYodlee', () => {
     const { ready, init } = useYodlee({
       containerId: 'container-fastlink',
       fastLinkOptions: {
+        fastLinkURL: 'https://node.sandbox.yodlee.com/authenticate/restserver',
         accessToken: 'foo'
       }
     });
