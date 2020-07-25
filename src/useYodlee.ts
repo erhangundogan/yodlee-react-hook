@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
-import { YodleeHookType } from '../index';
+import { TokenType, YodleeHookType } from '../index';
 
 const useYodlee: YodleeHookType = ({
- containerId,
- fastLinkOptions: {
-   fastLinkURL,
-   accessToken,
-   jwtToken,
-   userExperienceFlow = 'Verification'
- },
- onSuccess,
- onError,
- onExit,
- onEvent,
+  containerId,
+  createScriptTag = true,
+  fastLinkOptions: {
+    fastLinkURL,
+    token,
+    userExperienceFlow = 'Verification'
+  },
+  onSuccess,
+  onError,
+  onExit,
+  onEvent,
 }) => {
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(null);
@@ -20,40 +20,46 @@ const useYodlee: YodleeHookType = ({
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const script = document.createElement('script');
+    let script: HTMLScriptElement;
+    if (createScriptTag) {
+      script = document.createElement('script');
 
-    script.id = 'yodlee-fastlink-script';
-    script.src = 'https://cdn.yodlee.com/fastlink/v3/initialize.js';
-    script.async = true;
-    script.defer = true;
-    script.onload = () => setReady(true);
-    script.onerror = () => setError('Yodlee FastLink library could not be loaded!');
+      script.id = 'yodlee-fastlink-script';
+      script.src = 'https://cdn.yodlee.com/fastlink/v3/initialize.js';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => setReady(true);
+      script.onerror = () => setError('Yodlee FastLink library could not be loaded!');
 
-    document.body.appendChild(script);
+      document.body.appendChild(script);
+    }
 
     return () => {
       window.fastlink?.close();
-      document.body.removeChild(script);
+      if (createScriptTag) {
+        document.body.removeChild(script);
+      }
     }
   }, []);
 
-  const init = () => {
-    const token: { accessToken?: string; jwtToken?: string } = {};
+  const init = (currentToken?: TokenType) => {
+    const getTokenString = (t : TokenType) => {
+      switch (t.tokenType) {
+        case 'AccessToken': {
+          return { accessToken: `Bearer ${t.tokenValue}` };
+        }
+        case 'JwtToken': {
+          return { jwtToken: `Bearer ${t.tokenValue}` };
+        }
+      }
+    }
 
     setActive(true);
 
-    if (accessToken) {
-      token.accessToken = `Bearer ${accessToken}`;
-    } else {
-      token.jwtToken = `Bearer ${jwtToken}`;
-    }
-
     window.fastlink?.open({
       fastLinkURL,
-      ...token,
-      params: {
-        userExperienceFlow
-      },
+      params: { userExperienceFlow },
+      ...getTokenString(currentToken || token),
       onSuccess: (customerData: any) => {
         setData(customerData);
         onSuccess && onSuccess(customerData);

@@ -8,14 +8,17 @@ describe('useYodlee', () => {
       containerId: 'container-fastlink',
       fastLinkOptions: {
         fastLinkURL: 'https://node.sandbox.yodlee.com/authenticate/restserver',
-        accessToken: 'foo'
+        token: {
+          tokenType: 'AccessToken',
+          tokenValue: 'foo'
+        }
       }
     });
 
     return (
       <div className="container">
         <div id="container-fastlink"></div>
-        { ready ? <button onClick={ init }>Open Yodlee</button> : 'Loading...' }
+        { ready ? <button onClick={() => init()}>Open Yodlee</button> : 'Loading...' }
       </div>
     );
   }

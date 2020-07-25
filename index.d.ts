@@ -1,14 +1,21 @@
 export type UserExperienceFlowType = 'Aggregation' | 'Verification' | 'Aggregation plus Verification';
 
+export type TokenEnumType = 'AccessToken' | 'JwtToken';
+
+export interface TokenType {
+  tokenType: TokenEnumType;
+  tokenValue: string;
+}
+
 export interface FastLinkOptionsType {
   fastLinkURL: string;
-  accessToken?: string;
-  jwtToken?: string;
+  token?: TokenType;
   userExperienceFlow?: UserExperienceFlowType;
 }
 
 export interface YodleeHookPropsType {
   containerId: string;
+  createScriptTag?: boolean;
   fastLinkOptions: FastLinkOptionsType;
   onSuccess?: (args: any) => void;
   onError?: (args: any) => void;
@@ -17,7 +24,7 @@ export interface YodleeHookPropsType {
 }
 
 export interface YodleeHookReturnType {
-  init: () => void;
+  init: (token?: TokenType) => void;
   data: any;
   error: any;
   ready: boolean;

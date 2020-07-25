@@ -23,21 +23,25 @@ Generate `accessToken` or `jwtToken` with your `clientId`, `secret` and `userNam
 ```jsx
 import { useYodlee } from 'yodlee-react-hook';
 
-const YodleeComponent = ({ accessToken }) => {
+const MyComponent = () => {
   const { ready, init } = useYodlee({
     containerId: 'container-fastlink',
     fastLinkOptions: {
-      accessToken
+      fastLinkURL: 'https://node.sandbox.yodlee.com/authenticate/restserver',
+      token: {
+        tokenType: 'AccessToken',
+        tokenValue: 'foo'
+      }
     }
   });
 
   return (
     <div className="container">
       <div id="container-fastlink"></div>
-      { ready ? <button onClick={init}>Open your account</button> : 'Loading...' }
+      { ready ? <button onClick={() => init()}>Open Yodlee</button> : 'Loading...' }
     </div>
   );
-};
+}
 ```
 
 Test
@@ -55,17 +59,20 @@ Details
 
 ### `useYodlee` hook arguments:
 
-- containerId (string): Id for DOM Element to load iframe into.
-- fastLinkURL (string): FastLink URL to be used. Please see some URLs from tutorials below.
-  - USA: https://node.sandbox.yodlee.com/authenticate/restserver
-  - UK: https://node.sandbox.yodlee.uk/authenticate/uksandbox
-  - ANZ: https://sandbox-node.yodlee.com.au/authenticate/anzdevexsandbox
-- accessToken: (string): Pass this if you are using a client credential user access token. 
-- jwtToken: (string): Pass this if you are using a JWT user token.
-- userExperienceFlow (UserExperienceFlowType):
-  - Verification (default): Aggregate account profile information required to perform user profile verification.
-  - Aggregation: Aggregate account summary-level information and transactions.
-  - Aggregation plus Verification: Aggregate account summary-level information and transactions, along with account profile information.
+- containerId (`string`): Id for DOM Element to load iframe into.
+- createScriptTag (`boolean`, default = true): If you set this to false then hook will not add script element to component. It's suitable for react apps having script element already added to the page e.g. `<script defer async src="https://cdn.yodlee.com/fastlink/v3/initialize.js"></script>`. If you receive [cross-origin error from React](https://reactjs.org/docs/cross-origin-errors.html) then this would be the preferred solution for you.
+- fastLinkOptions (`FastLinkOptionsType`) 
+  - fastLinkURL (`string`): FastLink URL to be used. Please see URLs below from Yodlee codepen solution.
+    - USA: https://node.sandbox.yodlee.com/authenticate/restserver
+    - UK: https://node.sandbox.yodlee.uk/authenticate/uksandbox
+    - ANZ: https://sandbox-node.yodlee.com.au/authenticate/anzdevexsandbox
+  - token: (`TokenType`): 
+    - tokenType: (`'AccessToken' | 'JwtToken'`): Your token type
+    - tokenValue: (`string`): Your token value
+  - userExperienceFlow (`UserExperienceFlowType`, default = Verification):
+    - Verification: Aggregate account profile information required to perform user profile verification.
+    - Aggregation: Aggregate account summary-level information and transactions.
+    - Aggregation plus Verification: Aggregate account summary-level information and transactions, along with account profile information.
 -  onSuccess, onError, onExit, onEvent: Additional callback functions if you would like to add customer implementation.
 
 Please consult to Yodlee fastlink.open() [instructions](https://developer.yodlee.com/docs/fastlink/3.0/getting-started) for details.
@@ -77,3 +84,5 @@ Please consult to Yodlee fastlink.open() [instructions](https://developer.yodlee
 - active (boolean): Init method called or not 
 - data (any): Customer data received from onSuccess event
 - error (any): This is the error if Yodlee FastLink intercepts with any error
+
+You can find typescript definitions in `index.d.ts` file.
